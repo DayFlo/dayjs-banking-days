@@ -8,13 +8,13 @@ type occurrence = -1 | 1 | 2 | 3 | 4 | 5
 type dayOfWeek = Dayjs['day'] // 0-6
 
 declare namespace plugin {
-	interface BankingDaysOptions {
+	interface bankingDaysOptions {
 		fixedDateHolidays: string[]
 		floatingDateHolidays: {
 			[key: string]: [dayOfWeek, occurrence]
 		}
 	}
-	interface BankingDays {
+	interface bankingDays {
 		isBankingDay(): boolean
 		isBankingHoliday(): boolean
 		addBankingDays(number): Dayjs
@@ -25,5 +25,5 @@ declare namespace plugin {
 }
 
 declare module 'dayjs' {
-	interface Dayjs extends plugin.BankingDays {}
+	interface Dayjs extends plugin.bankingDays {}
 }
