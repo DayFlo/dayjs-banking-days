@@ -39,7 +39,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	* dayjs('2024-01-02').isBankHoliday() // false
 	* ```
 	*/
-	function isBankHoliday(date: dayjs.Dayjs): boolean {
+	function isBankingHoliday(date: dayjs.Dayjs): boolean {
 		const [, month, day] = date.format('YYYY-MM-DD').split('-')
 		const holidayMap = {
 			fixedDateHolidays: [
@@ -159,7 +159,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	}
 
 	dayjsClass.prototype.isBankingDay = isBankingDay
-	dayjsClass.prototype.isBankHoliday = isBankHoliday
+	dayjsClass.prototype.isBankingHoliday = isBankingHoliday
 	dayjsClass.prototype.addBankingDays = addBankingDays
 	dayjsClass.prototype.subtractBankingDays = subtractBankingDays
 	dayjsClass.prototype.nextBankingDay = nextBankingDay
