@@ -9,7 +9,7 @@ tsconfig.json
 tsconfig.build.json
 
 # Ignore compiled output
-dist/
+lib/
 
 # Ignore development files
 node_modules/

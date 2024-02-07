@@ -1,5 +1,5 @@
 import assert from 'node:assert'
-import { before, describe, test, it } from 'node:test'
+import { before, describe, it } from 'node:test'
 
 import dayjs from 'dayjs'
 

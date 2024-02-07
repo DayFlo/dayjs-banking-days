@@ -17,7 +17,7 @@ coverage
 node_modules
 
 # Output
-dist
+lib
 
 # Misc
 .DS_Store
