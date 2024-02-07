@@ -13,7 +13,7 @@ interface HolidayMap {
 declare module 'dayjs' {
 	interface Dayjs {
 		isBankingDay(): boolean
-		isBankHoliday(): boolean
+		isBankingHoliday(): boolean
 		addBankingDays(): Dayjs
 		subtractBankingDays(): Dayjs
 		nextBankingDay(): Dayjs
