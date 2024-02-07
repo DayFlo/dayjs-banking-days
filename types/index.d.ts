@@ -14,8 +14,8 @@ declare module 'dayjs' {
 	interface Dayjs {
 		isBankingDay(): boolean
 		isBankingHoliday(): boolean
-		addBankingDays(): Dayjs
-		subtractBankingDays(): Dayjs
+		addBankingDays(number): Dayjs
+		subtractBankingDays(number): Dayjs
 		nextBankingDay(): Dayjs
 		previousBankingDay(): Dayjs
 	}

@@ -115,7 +115,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 
 		// Add days to the current date
 		while (daysAdded < Math.abs(number)) {
-			day = day.add(number, 'day')
+			day = number > 0 ? day.add(1, 'day') : day.subtract(1, 'day')
 			if (day.isBankingDay()) daysAdded++
 		}
 
@@ -152,7 +152,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	 * dayjs('2024-01-03').prevBankingDay() // 2024-01-02
 	 * dayjs('2024-01-08').prevBankingDay() // 2024-01-05
 	 */
-	function prevBankingDay() {
+	function previousBankingDay() {
 		return this.addBankingDays(-1)
 	}
 
@@ -161,5 +161,5 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	dayjsClass.prototype.addBankingDays = addBankingDays
 	dayjsClass.prototype.subtractBankingDays = subtractBankingDays
 	dayjsClass.prototype.nextBankingDay = nextBankingDay
-	dayjsClass.prototype.prevBankingDay = prevBankingDay
+	dayjsClass.prototype.previousBankingDay = previousBankingDay
 }
