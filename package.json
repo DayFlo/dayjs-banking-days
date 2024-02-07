@@ -32,6 +32,7 @@
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build": "rm -rf dist && yarn build:cjs && yarn build:esm",
 		"prepublishOnly": "yarn build",
+    "publish": "yarn build && npm publish",
 		"prettier": "prettier --write ."
 	},
 	"devDependencies": {
