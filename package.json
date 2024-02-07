@@ -1,10 +1,10 @@
 {
 	"name": "dayjs-banking-days",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "dayflo",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
-	"types": "dist/esm/index.d.ts",
+	"types": "types/index.d.ts",
 	"type": "module",
 	"license": "MIT",
 	"keywords": [
@@ -32,9 +32,13 @@
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build": "rm -rf dist && yarn build:cjs && yarn build:esm",
 		"prepublishOnly": "yarn build",
-    "publish": "yarn build && npm publish",
+		"publish": "yarn build && npm publish",
 		"prettier": "prettier --write ."
 	},
+	"files": [
+		"dist",
+		"types"
+	],
 	"devDependencies": {
 		"@types/node": "^20.11.16",
 		"prettier": "^2.2.1",

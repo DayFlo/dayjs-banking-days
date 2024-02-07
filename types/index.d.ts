@@ -1,17 +1,20 @@
-import dayjs from 'dayjs'
+import { Dayjs, PluginFunc } from 'dayjs'
+
+declare const plugin: PluginFunc
+export as namespace plugin
+export = plugin
 
 type occurrence = -1 | 1 | 2 | 3 | 4 | 5
-type dayOfWeek = dayjs.Dayjs['day'] // 0-6
-// fixed date holidays are in the format 'MM-DD'
-interface HolidayMap {
-	fixedDateHolidays: string[]
-	floatingDateHolidays: {
-		[key: string]: [dayOfWeek, occurrence]
-	}
-}
+type dayOfWeek = Dayjs['day'] // 0-6
 
-declare module 'dayjs' {
-	interface Dayjs {
+declare namespace plugin {
+	interface BankingDaysOptions {
+		fixedDateHolidays: string[]
+		floatingDateHolidays: {
+			[key: string]: [dayOfWeek, occurrence]
+		}
+	}
+	interface BankingDays {
 		isBankingDay(): boolean
 		isBankingHoliday(): boolean
 		addBankingDays(number): Dayjs
@@ -21,4 +24,6 @@ declare module 'dayjs' {
 	}
 }
 
-export { HolidayMap }
+declare module 'dayjs' {
+	interface Dayjs extends plugin.BankingDays {}
+}

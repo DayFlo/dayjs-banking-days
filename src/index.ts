@@ -1,7 +1,6 @@
-import dayjs from 'dayjs'
-import { HolidayMap } from 'types'
+import { Dayjs, PluginFunc } from 'dayjs'
 
-export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
+const BankingDays: PluginFunc<plugin.BankingDaysOptions>  = (option: Partial<plugin.BankingDaysOptions> = {}, dayjsClass) => {
 	// On first load, check the option object for fixed date holidays and validate them
 	if (option.fixedDateHolidays) {
 		for (let i = 0; i < option.fixedDateHolidays.length; i++) {
@@ -18,7 +17,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	 * dayjs('2024-01-06').isBankingDay() // false
 	 * ```
 	 */
-	function isBankingDay() {
+	function isBankingDay(this: Dayjs): boolean {
 		const commonNonBankingDays = [0, 6] // Sunday and Saturday
 
 		if (commonNonBankingDays.includes(this.day())) return false
@@ -37,7 +36,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	 * dayjs('2024-01-02').isBankHoliday() // false
 	 * ```
 	 */
-	function isBankingHoliday(): boolean {
+	function isBankingHoliday(this: Dayjs): boolean {
 		const [, month, day] = this.format('YYYY-MM-DD').split('-')
 		const holidayMap = {
 			fixedDateHolidays: [
@@ -107,7 +106,7 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	 * dayjs('2024-01-05').addBankingDays(1) // 2024-01-08
 	 * ```
 	 */
-	function addBankingDays(number: number): dayjs.Dayjs {
+	function addBankingDays(number: number): Dayjs {
 		if (number === 0) return this
 
 		let daysAdded = 0
@@ -163,3 +162,5 @@ export default (option: Partial<HolidayMap> = {}, dayjsClass) => {
 	dayjsClass.prototype.nextBankingDay = nextBankingDay
 	dayjsClass.prototype.previousBankingDay = previousBankingDay
 }
+
+export default BankingDays
