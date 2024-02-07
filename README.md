@@ -7,10 +7,10 @@ This is a Day.js plugin that is meant to provide efficient ways for getting US b
 ### Installation
 
 Install via Bun, Yarn or NPM
+
 ```bash
 bun add dayjs-banking-days
 ```
-
 
 ```bash
 yarn add dayjs-banking-days
@@ -23,6 +23,7 @@ npm install dayjs-banking-days
 ## Usage
 
 By default, this plugin considers the following holidays:
+
 - New Year's Day
 - Martin Luther King Jr. Day
 - Presidents' Day
@@ -44,6 +45,7 @@ dayjs.extend(dayjsBankingDays)
 ```
 
 You can include custom dates by passing in an object that contains the one or both of the following properties:
+
 - `fixedDateHolidays`
 - `floatingDateHolidays`
 
@@ -54,9 +56,9 @@ import dayjs from 'dayjs'
 import dayjsBankingDays from 'dayjs-banking-days'
 
 dayjs.extend(dayjsBankingDays, {
-    fixedDateHolidays: ['05-04'],
-    floatingDateHolidays: {
-        10: [1, 2]
-    }
+	fixedDateHolidays: ['05-04'],
+	floatingDateHolidays: {
+		10: [1, 2],
+	},
 })
 ```

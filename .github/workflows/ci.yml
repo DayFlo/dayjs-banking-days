@@ -1,25 +1,24 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    types: [opened, synchronize, reopened]
+ push:
+  branches: [master]
+ pull_request:
+  types: [opened, synchronize, reopened]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
+ build:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4
+   - name: Setup NodeJS
+     uses: actions/setup-node@v4
+     with:
+      node-version: 21.x
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 21.x
+   - name: Install dependecies
+     run: yarn
 
-      - name: Install dependecies
-        run: yarn
-
-      - name: Run tests
-        run: yarn test
+   - name: Run tests
+     run: yarn test

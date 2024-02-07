@@ -1,23 +1,23 @@
 name: Publish
 
 on:
-  release:
-    types: [created]
-    
+ release:
+  types: [created]
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+ build:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
 
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '21.x'
-          registry-url: 'https://registry.npmjs.org'
+   # Setup .npmrc file to publish to npm
+   - uses: actions/setup-node@v4
+     with:
+      node-version: '21.x'
+      registry-url: 'https://registry.npmjs.org'
 
-      - run: yarn
+   - run: yarn
 
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+   - run: yarn publish
+     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

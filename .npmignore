@@ -1,0 +1,21 @@
+# Ignore source files
+src/
+
+# Ignore test files
+test/
+
+# Ignore TypeScript configuration files
+tsconfig.json
+tsconfig.build.json
+
+# Ignore compiled output
+dist/
+
+# Ignore development files
+node_modules/
+package-lock.json
+yarn.lock
+
+# Ignore build artifacts
+*.log
+*.tsbuildinfo
