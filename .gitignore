@@ -1,0 +1,23 @@
+# Logs
+logs
+*.log
+
+# Git
+.git
+
+# Yarn
+.yarn**
+.pnp**
+
+# Coverage
+coverage
+*.lcov
+
+# Node
+node_modules
+
+# Output
+dist
+
+# Misc
+.DS_Store
