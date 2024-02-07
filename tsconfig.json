@@ -15,6 +15,7 @@
     "importHelpers": true,
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
 	},
-	"include": ["src", "types", "test"],
+	"include": ["src/**/*.ts", "types/**/*.ts", "test"],
 }

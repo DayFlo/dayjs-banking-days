@@ -1,6 +1,7 @@
 import { Dayjs, PluginFunc } from 'dayjs'
+import { bankingDaysOptions } from 'dayjs' // From our extended options
 
-const bankingDays: PluginFunc<plugin.bankingDaysOptions>  = (option: Partial<plugin.bankingDaysOptions> = {}, dayjsClass) => {
+const bankingDays: PluginFunc<bankingDaysOptions>  = (option: Partial<bankingDaysOptions> = {}, dayjsClass) => {
 	// On first load, check the option object for fixed date holidays and validate them
 	if (option.fixedDateHolidays) {
 		for (let i = 0; i < option.fixedDateHolidays.length; i++) {
