@@ -1,29 +1,22 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es5",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "lib": [
-      "ESNext"
-    ],
-    "typeRoots": ["./node_modules/@types", "./types"]
-  },
-  "exclude": [
-    ".git",
-    "dist",
-    "node_modules",
-    "test",
-    "**/*.test.ts"
-  ],
-  "ts-node": {
-    "files": true
-  }
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"removeComments": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "es5",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"incremental": true,
+		"lib": ["ESNext"],
+		"typeRoots": ["./node_modules/@types", "./types"]
+	},
+	"include": ["src/**/*.ts", "types/**/*.d.ts", "test/**/*.ts"],
+	"exclude": [".git", "dist", "node_modules"],
+	"ts-node": {
+		"files": true
+	}
 }
