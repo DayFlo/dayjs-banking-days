@@ -1,6 +1,6 @@
 # dayjs-banking-days
 
-This is a Day.js plugin that is meant to provide efficient ways for getting US banking days excluding US bank holidays
+This is a Day.js plugin that is meant to provide efficient ways for getting US banking days excluding US bank holidays.
 
 - Inspired by [moment-holiday](https://github.com/kodie/moment-holiday) and [moment-business-days](https://www.npmjs.com/package/moment-business-days) intended for common US banking holidays
 
@@ -51,7 +51,7 @@ Fixed date holidays always occur on the same date each year and are represent as
 
 ```javascript
 import dayjs from 'dayjs'
-import dayjsBankingDays from 'dayjs-banking-days';
+import dayjsBankingDays from 'dayjs-banking-days'
 
 dayjs.extend(dayjsBankingDays, {
     fixedDateHolidays: ['05-04'],
