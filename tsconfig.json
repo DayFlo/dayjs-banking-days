@@ -8,7 +8,7 @@
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "baseUrl": "./src",
-    "rootDir": ".",
+    "rootDir": "./src",
     "outDir": "./lib/esm",
     "declaration": true,
     "skipLibCheck": false,
@@ -17,5 +17,5 @@
     "resolveJsonModule": true,
     "typeRoots": ["./node_modules/@types", "./types"],
 	},
-	"include": ["src/**/*.ts", "types/**/*.ts", "test"],
+	"include": ["src/**/*.ts", "types/**/*.ts"],
 }
