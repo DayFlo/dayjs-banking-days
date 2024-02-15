@@ -8,9 +8,6 @@ test/
 tsconfig.json
 tsconfig.build.json
 
-# Ignore compiled output
-lib/
-
 # Ignore development files
 node_modules/
 package-lock.json
