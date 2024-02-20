@@ -11,6 +11,44 @@ const bankingDays: PluginFunc<bankingDaysOptions>  = (option: Partial<bankingDay
 		}
 	}
 
+	const holidayMap = {
+		fixedDateHolidays: [
+			'01-01', // New Year's Day
+			'06-19', // Juneteenth
+			'07-04', // Independence Day
+			'11-11', // Veterans Day
+			'12-25', // Christmas Day
+		],
+		floatingDateHolidays: {
+			'01': [1, 3], // Martin Luther King Jr. Day
+			'02': [1, 3], // Presidents Day
+			'05': [1, -1], // Memorial Day
+			'09': [1, 1], // Labor Day
+			'10': [1, 2], // Columbus Day
+			'11': [4, 4], // Thanksgiving Day
+		},
+	}
+
+	// Assuming appendHolidays follows the same structure
+	if (option.fixedDateHolidays) {
+		holidayMap.fixedDateHolidays = [
+			...holidayMap.fixedDateHolidays,
+			...option.fixedDateHolidays,
+		]
+	}
+
+	if (option.floatingDateHolidays) {
+		Object.keys(option.floatingDateHolidays).forEach((month) => {
+			if (holidayMap.floatingDateHolidays[month]) {
+				// Merge or override the existing entry
+				holidayMap.floatingDateHolidays[month] = option.floatingDateHolidays[month]
+			} else {
+				// Otherwise add new entry
+				holidayMap.floatingDateHolidays[month] = option.floatingDateHolidays[month]
+			}
+		})
+	}
+
 	/**
 	 * Check if the date is a banking day
 	 * ```
@@ -39,46 +77,27 @@ const bankingDays: PluginFunc<bankingDaysOptions>  = (option: Partial<bankingDay
 	 */
 	function isBankingHoliday(this: Dayjs): boolean {
 		const [, month, day] = this.format('YYYY-MM-DD').split('-')
-		const holidayMap = {
-			fixedDateHolidays: [
-				'01-01', // New Year's Day
-				'06-19', // Juneteenth
-				'07-04', // Independence Day
-				'11-11', // Veterans Day
-				'12-25', // Christmas Day
-			],
-			floatingDateHolidays: {
-				'01': [1, 3], // Martin Luther King Jr. Day
-				'02': [1, 3], // Presidents Day
-				'05': [1, -1], // Memorial Day
-				'09': [1, 1], // Labor Day
-				'10': [1, 2], // Columbus Day
-				'11': [4, 4], // Thanksgiving Day
-			},
-		}
 
-		// Assuming appendHolidays follows the same structure
-		if (option.fixedDateHolidays) {
-			holidayMap.fixedDateHolidays = [
-				...holidayMap.fixedDateHolidays,
-				...option.fixedDateHolidays,
-			]
-		}
+		// Check if month is included in the fixed date holidays
+		if (holidayMap.fixedDateHolidays.some(x=> x.split('-')[0] === (month))) {
+			// Check if the day is included in the fixed date holidays
+			const adjustedMonthDay = this.format('MM-DD')
+			if (holidayMap.fixedDateHolidays.includes(adjustedMonthDay)) {
+				return true
+			}
 
-		if (option.floatingDateHolidays) {
-			Object.keys(option.floatingDateHolidays).forEach((month) => {
-				if (holidayMap.floatingDateHolidays[month]) {
-					// Merge or override the existing entry
-					holidayMap.floatingDateHolidays[month] = option.floatingDateHolidays[month]
-				} else {
-					// Otherwise add new entry
-					holidayMap.floatingDateHolidays[month] = option.floatingDateHolidays[month]
-				}
-			})
+			const clonedDay = this.clone()
+			// If day is Friday, check if the next day is a holiday
+			if (this.day() === 5) {
+				const addedDay = clonedDay.add(1, 'day')
+				if (holidayMap.fixedDateHolidays.includes(addedDay.format('MM-DD')))
+					return true
+			} else if (this.day() === 1) { // If day is Monday, check if the previous day is a holiday
+				const subtractedDay = clonedDay.subtract(1, 'day')
+				if (holidayMap.fixedDateHolidays.includes(subtractedDay.format('MM-DD')))
+					return true
+			}
 		}
-
-		// Check if the day is a fixed date holiday
-		if (holidayMap.fixedDateHolidays.includes(`${month}-${day}`)) return true
 
 		// Check if the month is in the holiday map
 		if (!Object.keys(holidayMap.floatingDateHolidays).includes(month))

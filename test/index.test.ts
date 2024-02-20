@@ -4,18 +4,35 @@ import { before, describe, it } from 'node:test'
 import dayjs from 'dayjs'
 
 import bankingDays from '../src'
+import plugin from '../types'
+
 before(() => {
-	dayjs.extend(bankingDays)
+	dayjs.extend(bankingDays as typeof plugin, {
+		fixedDateHolidays: ['05-04'],
+	})
 })
 
 describe('isBankingDay', () => {
 	it('should return false for Saturday and Sunday', () => {
-		assert.equal(dayjs('2024-01-06').isBankingDay(), false)
-		assert.equal(dayjs('2024-01-07').isBankingDay(), false)
+		const days = [
+			'2024-01-06',
+			'2024-01-07',
+		]
+
+		for (const day of days) {
+			assert.equal(dayjs(day).isBankingDay(), false)
+		}
 	})
 
-	it("should return false for New Year's Day", () => {
-		assert.equal(dayjs('2024-01-01').isBankingDay(), false)
+	it("should return false for New Year's Day (Observed)", () => {
+		const days = [
+			'2024-01-01', // New Year's Day
+			'2027-12-31', // New Year's Day observed
+		]
+
+		for (const day of days) {
+			assert.equal(dayjs(day).isBankingDay(), false)
+		}
 	})
 
 	it('should return true for a regular weekday', () => {
@@ -23,17 +40,30 @@ describe('isBankingDay', () => {
 	})
 
 	it('should return false for floating holidays', () => {
-		assert.equal(dayjs('2024-05-27').isBankingDay(), false)
-		assert.equal(dayjs('2025-05-26').isBankingDay(), false)
-		assert.equal(dayjs('2026-05-25').isBankingDay(), false)
-		assert.equal(dayjs('2027-05-31').isBankingDay(), false)
-		assert.equal(dayjs('2038-05-31').isBankingDay(), false)
+		const days = [
+			'2024-05-27',
+			'2025-05-26',
+			'2026-05-25',
+			'2027-05-31',
+			'2038-05-31',
+		]
+
+		for (const day of days) {
+			assert.equal(dayjs(day).isBankingDay(), false)
+		}
 	})
 })
 
 describe('isBankingHoliday', () => {
 	it("should return true for New Year's Day", () => {
-		assert.equal(dayjs('2024-01-01').isBankingHoliday(), true)
+		const days = [
+			'2024-01-01', // New Year's Day
+			'2027-12-31', // New Year's Day observed
+		]
+
+		for (const day of days) {
+			assert.equal(dayjs(day).isBankingHoliday(), true)
+		}
 	})
 
 	it('should return false for a regular weekday', () => {
@@ -278,5 +308,12 @@ describe('previousBankingDay', () => {
 			dayjs('2038-06-01').previousBankingDay().format('YYYY-MM-DD'),
 			'2038-05-28',
 		)
+	})
+})
+
+describe('bankingDaysOptions', () => {
+	it('should allow for custom holidays', () => {
+		assert.equal(dayjs('2023-05-04').isBankingDay(), false)
+		assert.equal(dayjs('2024-05-03').isBankingDay(), false)
 	})
 })

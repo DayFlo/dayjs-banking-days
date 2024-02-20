@@ -8,8 +8,8 @@ type dayOfWeek = Dayjs['day'] // 0-6
 
 declare module 'dayjs' {
 	type bankingDaysOptions = {
-		fixedDateHolidays: string[]
-		floatingDateHolidays: {
+		fixedDateHolidays?: string[]
+		floatingDateHolidays?: {
 			[key: string]: [dayOfWeek, occurrence]
 		}
 	}
