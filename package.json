@@ -24,8 +24,8 @@
 		"url": "git+https://github.com/dayflo/dayjs-banking-days.git"
 	},
 	"scripts": {
-		"test": "tsx --test **/*.(test|spec).ts",
-		"test:watch": "tsx --test --watch **/*.(test|spec).ts",
+		"test": "tsx --test **/*.test.ts **/*.spec.ts",
+		"test:watch": "tsx --test --watch **/*.test.ts **/*.spec.ts",
 		"test:coverage": "tsx --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=./coverage/lcov.info **/*.(test|spec).ts",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
 		"build:esm": "tsc -p tsconfig.json",
