@@ -1,6 +1,6 @@
 {
 	"name": "dayjs-banking-days",
-	"version": "0.2.0",
+	"version": "1.0.0",
 	"author": "dayflo",
 	"main": "./lib/cjs/index.js",
 	"module": "./lib/esm/index.js",
